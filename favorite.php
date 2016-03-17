@@ -5,28 +5,9 @@ if (!is_logged()) {
     relocate('logare');
 }
 
-$produs_id = $variables->get->id;
-$action = $variables->get->action;
+$userId = $variables->session->user;
 
-if ($action == 'salveaza') {
-    $favorit = new favorite();
-
-    $favorit->product_id = $produs_id;
-    $favorit->user_id = $variables->session->user;
-    $favorit->created = date('Y-m-d H:i:s');
-    $favorit->modified = date('Y-m-d H:i:s');
-    $favorit->create();
-    relocate('home');
-} elseif ($action == 'sterge') {
-    $favoritTemp = favorite::verificaFavorit($variables->session->user, $produs_id);
-
-    /** @var favorite $favorit */
-    $favorit = favorite::get_by_id($favoritTemp->id);
-
-    $favorit->delete();
-    relocate('home');
-}
-relocate('home');
+$favorite = favorite::getFavorites($userId);
 
 require 'includes/start.php';
 ?>
@@ -39,7 +20,18 @@ require 'includes/start.php';
 <?php require 'includes/menu.php'; ?>
 
     <section class="content">
-
+        <?php if ($favorite) {
+            /** @var favorite $favorit */
+            foreach ($favorite as $favorit) {
+                /** @var produse $produs */
+               $produs = produse::get_by_id($favorit->product_id); ?>
+                <div class="">
+                    favorit #1 <?php echo $produs->nume; ?>
+                </div>
+            <?php }
+        } else { ?>
+            nici un favorit
+        <?php } ?>
     </section>
 <?php
 

@@ -15,5 +15,6 @@ RewriteRule ^adauga$ adauga.php
 RewriteRule ^edit$ edit.php
 RewriteRule ^delete$ delete.php
 RewriteRule ^imagine/(.*)$ imagine.php?id=$1
+RewriteRule ^favorit$ favorit.php
 
 </IfModule>

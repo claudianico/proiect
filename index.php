@@ -1,7 +1,15 @@
 <?php
 require 'resources/init.php';
 
-$produse = produse::get_all();
+$pagination = new pagination();
+
+$sql = "SELECT * FROM produse";
+
+$pagination->page = isset($variables->get->page) ? $variables->get->page : 1;
+$pagination->per_page = 3;
+$pagination->sql($sql);
+
+$produse = $pagination->getResults();
 
 require 'includes/start.php';
 ?>
@@ -43,12 +51,12 @@ require 'includes/start.php';
                     $favorit = favorite::verificaFavorit($variables->session->user, $produs->id);
                     if ($favorit) { ?>
                         <div class="dress_favorite">
-                            <a href="favorite?id=<?php echo $produs->id; ?>&action=sterge" class="star">
+                            <a href="favorit?id=<?php echo $produs->id; ?>&action=sterge" class="star">
                                 <img src="images/stalb.png" title="Sterge din favorite"></a>
                         </div>
                     <?php } else { ?>
                         <div class="dress_favorite">
-                            <a href="favorite?id=<?php echo $produs->id; ?>&action=salveaza" class="star">
+                            <a href="favorit?id=<?php echo $produs->id; ?>&action=salveaza" class="star">
                                 <img src="images/stelu.png" title="Salveaza ca favorite"></a>
                         </div>
                     <?php }
@@ -62,11 +70,11 @@ require 'includes/start.php';
         <?php } ?>
 
         <div class="clear"></div>
-        <ul class="pagination">
-            <li><a href="http://localhost/proiect/" class="numar">1</a></li>
-            <li><a href="http://localhost/proiect/accesorii" class="numar2">2</a></li>
-        </ul>
 
+        <?php
+        $format = 'home?page=[%PAGE%]';
+        echo $pagination->paginate($format);
+        ?>
         <div class="clear"></div>
     </section>
 

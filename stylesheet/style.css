@@ -289,9 +289,6 @@ img {margin: 0px;padding: 0px;}
     width: 20px;
     float:right;
 }
-.pagination{
- width: 50px;
- }
 .adauga{
     display:block;
     float:right;
@@ -378,6 +375,11 @@ img {margin: 0px;padding: 0px;}
 .pagination {
     list-style-type: none;
     margin: 0px auto;
+    width: 100px;
+}
+.pagination li {
+    float: left;
+    padding: 0px 5px;
 }
 
 .pagination_unselected {

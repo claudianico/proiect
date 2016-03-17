@@ -57,4 +57,21 @@ class favorite extends table
             return FALSE;
         }
     }
+
+    /**
+     * @param $userId
+     * @return array|bool
+     */
+    public static function getFavorites($userId)
+    {
+        global $database;
+        $sql = "SELECT * FROM " . static::$table . " WHERE user_id = '" . $database->escape($userId) . "'";
+
+        $result = static::get_custom($sql);
+        if ($result) {
+            return $result;
+        } else {
+            return FALSE;
+        }
+    }
 }
