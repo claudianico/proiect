@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+RewriteBase /proiect/
+
+RewriteRule ^home$ index.php
+RewriteRule ^logare$ autentificare.php
+RewriteRule ^cont$ cont.php
+RewriteRule ^favorite$ favorite.php
+RewriteRule ^accesorii$ accesorii.php
+RewriteRule ^iesire$ logout.php
+RewriteRule ^admin$ admin.php
+RewriteRule ^admin-account$ admin-account.php
+RewriteRule ^adauga$ adauga.php
+RewriteRule ^edit$ edit.php
+RewriteRule ^delete$ delete.php
+RewriteRule ^imagine/(.*)$ imagine.php?id=$1
+
+</IfModule>
